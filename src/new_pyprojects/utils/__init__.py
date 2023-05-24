@@ -6,4 +6,4 @@ class PackagePaths:
 
     ROOT = pathlib.Path(__file__).resolve().parents[3].absolute()
     TEST = ROOT / "tests"
-    TEMPLATES = ROOT / "templates"
+    TEMPLATES = ROOT / "src" / "templates"
