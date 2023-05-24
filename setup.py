@@ -51,7 +51,7 @@ setup(
     install_requires=install_requires,  # Optional
     # If there are data files included in your packages that need to be
     # installed, specify them here.
-    package_data={},  # Optional
+    package_data={"": ["templates/*"]},  # Optional
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:
     # http://docs.python.org/distutils/setupscript.html#installing-additional-files
