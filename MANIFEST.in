@@ -1,4 +1,4 @@
-include templates/backend_dir_files/*
-include templates/cli_dir_files/*
-include templates/ml_dir_files/*
-include templates/root_dir_files/*
+recursive-include templates/backend_dir_files *
+recursive-include templates/cli_dir_files *
+recursive-include templates/ml_dir_files *
+recursive-include templates/root_dir_files *
