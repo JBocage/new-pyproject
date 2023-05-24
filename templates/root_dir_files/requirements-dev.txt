@@ -1,4 +1,0 @@
-black
-ipykernel
-pre-commit
-pytest
