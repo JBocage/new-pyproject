@@ -1,3 +1,4 @@
+"""Implement a setup.py writing function"""
 from typing import Optional
 
 
@@ -8,10 +9,25 @@ def write_setup(
     cli_entrypoint: Optional[str] = None,
     cli_in_src: bool = False,
 ):
+    """Generates the content for a setup.py files.
+
+    Args:
+        project_name (str): The name of the package
+        author (Optional[str], optional): The author of the package.
+            Defaults to None.
+        author_email (Optional[str], optional):The author email of the package.
+            Defaults to None.
+        cli_entrypoint (Optional[str], optional): If provided, will add
+            a cli entrypoint to the package. It will be spelled like
+            the provided string. Defaults to None.
+        cli_in_src (bool, optional): Whether to put cli-related scripts in src,
+            along with the package actual code. Defaults to False.
+    """
 
     setup_file_content = ""
 
     def add_line(line: str = ""):
+        """Adds a line to the setup file content"""
         nonlocal setup_file_content
         setup_file_content += line + "\n"
 
@@ -85,8 +101,3 @@ setup(
     add_line(")")
 
     return setup_file_content
-
-
-print(write_setup("lala", "loulou", cli_entrypoint="somentrypoint"))
-
-# %%

@@ -1,4 +1,10 @@
-"""This file implements a command line interface for launching generators"""
+"""
+Implements the command line interface for new-pyprojects
+
+Learn more by running
+
+`new-pyproject --help`
+"""
 
 import os
 import pathlib
@@ -99,7 +105,7 @@ class Config(object):
 @click.argument("project_name", type=click.STRING, required=True)
 @click.pass_context
 def cli(ctx, *args, **kwargs):
-    """Loads all high level kwargs into the config"""
+    """Runs the project-creating command"""
     ctx.obj = Config()
     for key, value in kwargs.items():
         ctx.obj.set_config(key, value)
@@ -119,30 +125,29 @@ def cli(ctx, *args, **kwargs):
     run_install: bool = args["run_install"]
     package_description: Optional[str] = args["package_description"]
 
-    # Compute args
+    # Compute extra args
     package_name = project_name.replace("-", "_")
     add_data_dir = add_data_dir or is_ml_project
 
+    # Check arguments relevance
     if [cli_entrypoint, cli_type].count(None) == 1:
         raise ValueError(
             "cli-type and cli-entrypoint have to be either both provided"
             f"of both ignored. Got cli-type={cli_type} and cli-entrypoint={cli_entrypoint}"
         )
-
-    from new_pyprojects.utils import PackagePaths
-
-    _call_path = pathlib.Path(os.getcwd()).resolve().absolute()
-    project_root = _call_path / project_name
-
+    project_root = pathlib.Path(os.getcwd()).resolve().absolute() / project_name
     if project_root.exists():
         raise FileExistsError("You are trying to create a project that already exists")
 
+    # Launch directory building
+    from new_pyprojects.utils import PackagePaths
+
     # Build ROOT
     project_root.mkdir()
-
     for fpath in (PackagePaths.TEMPLATES / "root_dir_files").iterdir():
         shutil.copy(fpath, project_root / fpath.name)
 
+    # write setup.py
     setup_str = write_setup(
         project_name=project_name,
         author=author_name,
@@ -150,7 +155,9 @@ def cli(ctx, *args, **kwargs):
         cli_entrypoint=cli_entrypoint,
         cli_in_src=cli_in_src,
     )
-
+    with open(project_root / "setup.py", "w+") as f:
+        f.write(setup_str)
+    # write requirements.txt
     requirements = []
     if cli_entrypoint:
         requirements.append("click")
@@ -174,14 +181,10 @@ def cli(ctx, *args, **kwargs):
     with open(project_root / "requirements.txt", "w+") as f:
         f.write("\n".join(requirements))
 
-    with open(project_root / "setup.py", "w+") as f:
-        f.write(setup_str)
-
     # Build SRC
     src_path = project_root / "src" / package_name
     src_path.mkdir(parents=True)
     (src_path.parent / "__init__.py").touch()
-
     with open(src_path / "__init__.py", "w+") as f:
         f.write(
             f"__VERSION__ = (0, 0, 1)\n"
@@ -192,10 +195,8 @@ def cli(ctx, *args, **kwargs):
     # Build utils
     utils_path = src_path / "utils"
     utils_path.mkdir()
-
     with open(utils_path / "__init__.py", "w+") as f:
         f.write("from .paths import PackagePaths")
-
     with open(utils_path / "paths.py", "w+") as f:
         f.write(
             write_package_paths(
@@ -248,10 +249,8 @@ def cli(ctx, *args, **kwargs):
         model_savepath.mkdir()
         with open(model_savepath / ".gitignore", "w+") as f:
             f.write("#Ignore all models checkpoints\n.\n!.gitignore\n")
-
         ml_path = src_path / "ml"
         ml_path.mkdir()
-
         models_path = ml_path / "models"
         models_path.mkdir()
         (models_path / "__init__.py").touch()
@@ -261,7 +260,6 @@ def cli(ctx, *args, **kwargs):
                 .read_text()
                 .replace("PACKAGE_NAME", package_name)
             )
-
         trainer_path = ml_path / "trainers"
         trainer_path.mkdir()
         (trainer_path / "__init__.py").touch()
@@ -276,7 +274,6 @@ def cli(ctx, *args, **kwargs):
     if fastapi_backend:
         backend_path = project_root / "backend"
         backend_path.mkdir()
-
         shutil.copy(
             PackagePaths.TEMPLATES / "backend_dir_files" / ".env",
             backend_path / ".env",

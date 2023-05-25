@@ -1,4 +1,22 @@
-def write_package_paths(data_dir: bool = False, models_dir: bool = False):
+"""Implements a function to initialise dynamic paths"""
+
+
+def write_package_paths(
+    data_dir: bool = False, models_dir: bool = False, tests_dir: bool = True
+) -> str:
+    """Writes the package paths file. It defines the dynamic paths of the project
+
+    Args:
+        data_dir (bool, optional): Whether there is a data directory for
+            the project. Defaults to False.
+        models_dir (bool, optional): Whether there is a models directory for the
+            project. Defaults to False.
+        tests_dir (bool, optional): Whether there is a tests directory for the
+            project. Defaults to False.
+
+    Returns:
+        str: The content of the path-defining py file
+    """
     file_content = ""
 
     def write_line(line: str = ""):
@@ -17,7 +35,7 @@ def write_package_paths(data_dir: bool = False, models_dir: bool = False):
         write_line('    DATA = ROOT / "data"\n')
     if models_dir:
         write_line('    MODELS = ROOT / "models"\n')
-
-    write_line('    TEST = ROOT / "tests"')
+    if tests_dir:
+        write_line('    TEST = ROOT / "tests"\n')
 
     return file_content
