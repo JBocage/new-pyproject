@@ -177,7 +177,6 @@ def cli(ctx, *args, **kwargs):
             ]
         )
     requirements = sorted(list(set(requirements)))
-    print(requirements)
     with open(project_root / "requirements.txt", "w+") as f:
         f.write("\n".join(requirements))
 
