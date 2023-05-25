@@ -149,7 +149,7 @@ def cli(ctx, *args, **kwargs):
 
     # write setup.py
     setup_str = write_setup(
-        project_name=project_name,
+        package_name=package_name,
         author=author_name,
         author_email=author_email,
         cli_entrypoint=cli_entrypoint,

@@ -3,7 +3,7 @@ from typing import Optional
 
 
 def write_setup(
-    project_name: str,
+    package_name: str,
     author: Optional[str] = None,
     author_email: Optional[str] = None,
     cli_entrypoint: Optional[str] = None,
@@ -36,7 +36,7 @@ def write_setup(
     add_line("from setuptools import find_packages, setup")
     add_line()
     add_line(
-        f"from src.{project_name} import __DESCRIPTION__, __PACKAGE_NAME__, __VERSION__"
+        f"from src.{package_name} import __DESCRIPTION__, __PACKAGE_NAME__, __VERSION__"
     )
     for line in """here = pathlib.Path(__file__).parent.resolve()
 
@@ -86,7 +86,7 @@ setup(
                 '    entry_points={"console_scripts": ["'
                 + cli_entrypoint
                 + " = "
-                + project_name
+                + package_name
                 + '_cli.main:cli"]},'
             )
         else:
@@ -94,7 +94,7 @@ setup(
                 '    entry_points={"console_scripts": ["'
                 + cli_entrypoint
                 + " = "
-                + project_name
+                + package_name
                 + '.cli.main:cli"]},'
             )
 
