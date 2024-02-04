@@ -150,7 +150,7 @@ def cli(ctx, *args, **kwargs):
     dst.mkdir()
 
     recurse_copy_and_modify(
-        src=Paths.templates / "___PROJECT_NAME",
+        src=Paths.TEMPLATE / "___PROJECT_NAME",
         dst=dst,
         names_to_change=names_mapping,
         flags=flags,

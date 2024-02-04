@@ -7,4 +7,6 @@ class Paths:
 
     SRC = ROOT / "src"
 
-    templates = SRC / "new_pyprojects" / "template"
+    PACKAGE_ROOT = pathlib.Path(__file__).parent.parent
+
+    TEMPLATE = PACKAGE_ROOT / "template"
