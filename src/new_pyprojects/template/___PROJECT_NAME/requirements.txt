@@ -1,0 +1,4 @@
+click  # F:CLI
+fastapi  # F:API
+pydantic  # F:API
+uvicorn  # F:API

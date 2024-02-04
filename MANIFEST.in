@@ -1,0 +1,4 @@
+recursive-include src/new_pyprojects/templates/backend_dir_files *
+recursive-include src/new_pyprojects/templates/cli_dir_files *
+recursive-include src/new_pyprojects/templates/ml_dir_files *
+recursive-include src/new_pyprojects/templates/root_dir_files *
