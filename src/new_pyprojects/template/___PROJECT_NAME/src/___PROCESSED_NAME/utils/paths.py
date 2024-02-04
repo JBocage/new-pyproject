@@ -6,5 +6,5 @@ class Paths:
     ROOT = pathlib.Path(__file__).parent.parent.parent.parent
     SRC = ROOT / "src"
 
-    CLI = SRC / "___PROJECT_NAME_PROCESSED" / "cli"  # F:CLI
-    API = SRC / "___PROJECT_NAME_PROCESSED" / "api"  # F:API
+    CLI = SRC / "___PROCESSED_NAME" / "cli"  # F:CLI
+    API = SRC / "___PROCESSED_NAME" / "api"  # F:API
