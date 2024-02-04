@@ -8,6 +8,8 @@ Learn more by running
 
 import os
 import pathlib
+import shutil
+from tempfile import TemporaryDirectory
 
 import click
 

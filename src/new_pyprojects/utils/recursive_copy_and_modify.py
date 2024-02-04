@@ -30,6 +30,8 @@ def process_and_copy_file(
 ):
     dst = update_dst_name(dst, names_to_change)
     """Processes a file, and copies it to the destination"""
+
+    print("reading", src)
     with open(src, "r") as file:
         file_lines = file.readlines()
         lines_to_write = []
@@ -66,6 +68,9 @@ def recurse_copy_and_modify(
     flags: Dict[str, bool],
 ):
     """Recursively copies a directory from src to dst, modifying the files as it goes"""
+    if src.name == "__pycache__":
+        return
+
     dst = update_dst_name(dst, names_to_change)
     dst.mkdir(exist_ok=True)
 
