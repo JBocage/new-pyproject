@@ -8,8 +8,6 @@ Learn more by running
 
 import os
 import pathlib
-import shutil
-from tempfile import TemporaryDirectory
 
 import click
 
@@ -105,6 +103,13 @@ class Config(object):
     help="Create the first commit",
 )
 @click.option(
+    "--full",
+    "full",
+    is_flag=True,
+    help="Create a full project",
+    hidden=True,  # This is more for testing purposes
+)
+@click.option(
     "--install",
     "install",
     is_flag=True,
@@ -147,6 +152,27 @@ def cli(ctx, *args, **kwargs):
         "INSTALL": ctx.obj.config["install"],
         "TESTS": not ctx.obj.config["no_tests"],
     }
+
+    if ctx.obj.config["full"]:
+        flags["API"] = True
+        flags["CLI"] = True
+        flags["CLICOMMAND"] = False  # Mutually exclusive with CLIGROUP
+        flags["CLIGROUP"] = True
+        flags["GIT"] = True
+        flags["FIRSTCOMMIT"] = True
+        flags["INSTALL"] = True
+        flags["TESTS"] = True
+
+        # Fill in the missing names in the names_mapping if they are not provided
+        if not names_mapping["___AUTHOR_NAME"]:
+            names_mapping["___AUTHOR_NAME"] = "AUTHOR_NAME"
+        if not names_mapping["___AUTHOR_EMAIL"]:
+            names_mapping["___AUTHOR_EMAIL"] = "EMAIL"
+        if not names_mapping["___CLI_NAME"]:
+            names_mapping["___CLI_NAME"] = "CLI_NAME"
+
+        # Overwrite the install config
+        ctx.obj.set_config("install", True)
 
     dst = pathlib.Path.cwd() / ctx.obj.config["project_name"]
     dst.mkdir()
