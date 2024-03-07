@@ -8,6 +8,7 @@ Learn more by running
 
 import os
 import pathlib
+import shutil
 
 import click
 
@@ -103,6 +104,16 @@ class Config(object):
     help="Create the first commit",
 )
 @click.option(
+    "--force",
+    "-f",
+    "force",
+    is_flag=True,
+    help=(
+        "Force the creation of the project, "
+        "even if something exists in the destination"
+    ),
+)
+@click.option(
     "--full",
     "full",
     is_flag=True,
@@ -183,6 +194,17 @@ def cli(ctx, *args, **kwargs):
         ctx.obj.set_config("install", True)
 
     dst = pathlib.Path.cwd() / ctx.obj.config["project_name"]
+
+    if dst.exists():
+        if ctx.obj.config["force"]:
+            shutil.rmtree(str(dst.absolute()))
+        else:
+            click.echo(
+                f"Destination {dst.absolute()} already exists. "
+                "Use --force to overwrite it"
+            )
+            return
+
     dst.mkdir()
 
     recurse_copy_and_modify(
