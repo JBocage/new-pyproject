@@ -8,3 +8,4 @@ class Paths:
 
     CLI = SRC / "___PROCESSED_NAME" / "cli"  # F:CLI
     API = SRC / "___PROCESSED_NAME" / "api"  # F:API
+    STREAMLIT_APP = SRC / "___PROCESSED_NAME" / "streamlit_app"  # F:STREAMLIT

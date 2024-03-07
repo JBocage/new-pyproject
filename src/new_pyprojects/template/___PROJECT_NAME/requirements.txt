@@ -1,4 +1,5 @@
 click  # F:CLI
 fastapi  # F:API
 pydantic  # F:API
+streamlit  # F:STREAMLIT
 uvicorn  # F:API

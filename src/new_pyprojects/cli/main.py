@@ -115,6 +115,12 @@ class Config(object):
     is_flag=True,
     help="Install the project after creating it",
 )
+@click.option(
+    "--streamlit",
+    "streamlit",
+    is_flag=True,
+    help="Create a streamlit app",
+)
 @click.argument("project_name", type=click.STRING, required=True)
 @click.pass_context
 def cli(ctx, *args, **kwargs):
@@ -150,6 +156,7 @@ def cli(ctx, *args, **kwargs):
             ctx.obj.config["first_commit"] or ctx.obj.config["first_commit_msg"]
         ),
         "INSTALL": ctx.obj.config["install"],
+        "STREAMLIT": ctx.obj.config["streamlit"],
         "TESTS": not ctx.obj.config["no_tests"],
     }
 
@@ -161,6 +168,7 @@ def cli(ctx, *args, **kwargs):
         flags["GIT"] = True
         flags["FIRSTCOMMIT"] = True
         flags["INSTALL"] = True
+        flags["STREAMLIT"] = True
         flags["TESTS"] = True
 
         # Fill in the missing names in the names_mapping if they are not provided
