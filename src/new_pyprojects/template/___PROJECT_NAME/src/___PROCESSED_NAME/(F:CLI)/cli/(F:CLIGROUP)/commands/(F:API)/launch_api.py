@@ -7,7 +7,7 @@ import click
 @click.pass_context
 def launch_api(ctx, *args, **kwargs):
     """
-    Hello world command
+    Launch api for ___PROJECT_NAME
     """
 
     from ___PROCESSED_NAME.utils.paths import Paths

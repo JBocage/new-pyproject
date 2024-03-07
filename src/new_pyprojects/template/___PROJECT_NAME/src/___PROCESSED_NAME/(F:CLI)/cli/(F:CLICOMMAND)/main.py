@@ -24,7 +24,7 @@ class Config(object):
 @click.version_option(version=__VERSION__)
 @click.pass_context
 def cli(ctx, *args, **kwargs):
-    """Runs the project-creating command"""
+    """Hello-world command line"""
     ctx.obj = Config()
     for key, value in kwargs.items():
         ctx.obj.set_config(key, value)
