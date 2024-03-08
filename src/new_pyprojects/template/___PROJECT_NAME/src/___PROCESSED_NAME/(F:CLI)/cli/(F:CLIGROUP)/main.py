@@ -6,6 +6,7 @@ from ___PROCESSED_NAME import __VERSION__
 from .commands.hello_world import hello_world
 from .commands.launch_api import launch_api
 from .commands.launch_streamlit_app import launch_streamlit_app
+from .commands.update_sphinx_doc import doc_cli_group  # F:DOCS
 
 
 class Config(object):
@@ -30,5 +31,6 @@ def cli(ctx, *args, **kwargs):
 
 
 cli.add_command(hello_world)
-cli.add_command(launch_api)
-cli.add_command(launch_streamlit_app)
+cli.add_command(launch_api)  # F:API
+cli.add_command(launch_streamlit_app)  # F:
+cli.add_command(doc_cli_group)  # F:DOCS

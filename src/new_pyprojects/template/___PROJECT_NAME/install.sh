@@ -13,3 +13,5 @@ git add .  # F:FIRSTCOMMIT
 git commit -m "___FIRST_COMMIT_MSG"  # F:FIRSTCOMMIT
 
 pre-commit install # F:GIT
+
+___CLI_NAME doc update # F:CLIGROUP&DOCS

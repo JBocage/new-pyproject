@@ -127,6 +127,12 @@ class Config(object):
     help="Install the project after creating it",
 )
 @click.option(
+    "--sphinx",
+    "sphinx",
+    is_flag=True,
+    help="Create a sphinx documentation",
+)
+@click.option(
     "--streamlit",
     "streamlit",
     is_flag=True,
@@ -162,6 +168,7 @@ def cli(ctx, *args, **kwargs):
         ),
         "CLIGROUP": ctx.obj.config["cli_group"],
         "CLICOMMAND": not ctx.obj.config["cli_group"],
+        "DOCS": ctx.obj.config["sphinx"],
         "GIT": not ctx.obj.config["no_git"],
         "FIRSTCOMMIT": bool(
             ctx.obj.config["first_commit"] or ctx.obj.config["first_commit_msg"]
@@ -176,6 +183,7 @@ def cli(ctx, *args, **kwargs):
         flags["CLI"] = True
         flags["CLICOMMAND"] = False  # Mutually exclusive with CLIGROUP
         flags["CLIGROUP"] = True
+        flags["DOCS"] = True
         flags["GIT"] = True
         flags["FIRSTCOMMIT"] = True
         flags["INSTALL"] = True

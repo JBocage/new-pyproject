@@ -1,7 +1,7 @@
 import os
 
 import click
-from tmp.utils.paths import Paths
+from ___PROCESSED_NAME.utils.paths import Paths
 
 
 @click.command("launch-streamlit")
