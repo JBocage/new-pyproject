@@ -5,6 +5,9 @@ pip install wheel
 pip install -e .
 pip install -r requirements-dev.txt
 
+black . -q
+isort .
+
 git init # F:GIT
 git add .  # F:FIRSTCOMMIT
 git commit -m "___FIRST_COMMIT_MSG"  # F:FIRSTCOMMIT
