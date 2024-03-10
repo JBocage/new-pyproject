@@ -11,7 +11,7 @@ class Paths:
 
     .. code-block:: python
 
-        from src.tmp.utils.paths import Paths
+        from ___PROCESSED_NAME.utils.paths import Paths
 
         print(Paths.ROOT)
     """
