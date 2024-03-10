@@ -1,4 +1,4 @@
+black
+ipykernel
 pre-commit # F:GIT
 pytest  # F:TESTS
-ipykernel
-black

@@ -80,18 +80,6 @@ class Config(object):
     help="The description of the project",
 )
 @click.option(
-    "--no-tests",
-    "no_tests",
-    is_flag=True,
-    help="Do not create a tests directory",
-)
-@click.option(
-    "--no-git",
-    "no_git",
-    is_flag=True,
-    help="Do not create a git repository",
-)
-@click.option(
     "--env",
     "env",
     is_flag=True,
@@ -131,6 +119,18 @@ class Config(object):
     "install",
     is_flag=True,
     help="Install the project after creating it",
+)
+@click.option(
+    "--no-tests",
+    "no_tests",
+    is_flag=True,
+    help="Do not create a tests directory",
+)
+@click.option(
+    "--no-git",
+    "no_git",
+    is_flag=True,
+    help="Do not create a git repository",
 )
 @click.option(
     "--sphinx",
