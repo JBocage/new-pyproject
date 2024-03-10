@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import click
 from ___PROCESSED_NAME.utils.paths import Paths
@@ -33,6 +34,7 @@ def update_sphinx_doc(ctx, *args, **kwargs):
     """
 
     os.chdir(str(Paths.ROOT))
+    shutil.rmtree(str(Paths.DOCS / "source" / "generated_full_doc"), ignore_errors=True)
     os.system(
         f"sphinx-apidoc -o {str(Paths.DOCS / 'source' / 'generated_full_doc')} "
         f"{str(Paths.SRC / '___PROCESSED_NAME')}"
