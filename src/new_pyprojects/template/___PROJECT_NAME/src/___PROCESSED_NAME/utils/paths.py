@@ -32,3 +32,5 @@ class Paths:
     #: The Streamlit app directory of the project.   # F:STREAMLIT
     #: This is where the Streamlit app scripts are stored. # F:STREAMLIT
     STREAMLIT_APP = SRC / "___PROCESSED_NAME" / "streamlit_app"  # F:STREAMLIT
+    #: The .env file of the project. # F:ENV
+    ENV = ROOT / ".env"  # F:ENV

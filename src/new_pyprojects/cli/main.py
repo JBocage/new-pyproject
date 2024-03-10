@@ -92,6 +92,12 @@ class Config(object):
     help="Do not create a git repository",
 )
 @click.option(
+    "--env",
+    "env",
+    is_flag=True,
+    help="Create an .env file",
+)
+@click.option(
     "--first-commit-msg",
     "first_commit_msg",
     type=click.STRING,
@@ -169,6 +175,7 @@ def cli(ctx, *args, **kwargs):
         "CLIGROUP": ctx.obj.config["cli_group"],
         "CLICOMMAND": not ctx.obj.config["cli_group"],
         "DOCS": ctx.obj.config["sphinx"],
+        "ENV": ctx.obj.config["env"],
         "GIT": not ctx.obj.config["no_git"],
         "FIRSTCOMMIT": bool(
             ctx.obj.config["first_commit"] or ctx.obj.config["first_commit_msg"]
@@ -184,6 +191,7 @@ def cli(ctx, *args, **kwargs):
         flags["CLICOMMAND"] = False  # Mutually exclusive with CLIGROUP
         flags["CLIGROUP"] = True
         flags["DOCS"] = True
+        flags["ENV"] = True
         flags["GIT"] = True
         flags["FIRSTCOMMIT"] = True
         flags["INSTALL"] = True

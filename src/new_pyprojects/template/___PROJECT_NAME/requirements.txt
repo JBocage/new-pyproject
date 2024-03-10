@@ -2,6 +2,7 @@ click  # F:CLI
 fastapi  # F:API
 furo  # F:DOCS
 pydantic  # F:API
+python-dotenv  # F:ENV
 sphinx  # F:DOCS
 streamlit  # F:STREAMLIT
 uvicorn  # F:API
