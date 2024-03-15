@@ -11,7 +11,17 @@ def doc_cli_group(ctx, *args, **kwargs):
     """
     A group of commands to manage the documentation
     """
-    pass
+    # Check if the docs directory exists
+    sphinx_conf_path = Paths.DOCS / "source" / "conf.py"
+
+    if not sphinx_conf_path.exists():
+        print(
+            "\nThe docs directory does not exist. You are"
+            " probably running this command in a packaged"
+            " version of the project.\nTo access this part of the command,"
+            " you need to run the command from a cloned version of the project.\n"
+        )
+        exit(1)
 
 
 def open_doc():
@@ -33,7 +43,6 @@ def update_sphinx_doc(ctx, *args, **kwargs):
     Updates the sphinx doc
     """
 
-    os.chdir(str(Paths.ROOT))
     shutil.rmtree(str(Paths.DOCS / "source" / "generated_full_doc"), ignore_errors=True)
     os.system(
         f"sphinx-apidoc -o {str(Paths.DOCS / 'source' / 'generated_full_doc')} "

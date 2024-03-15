@@ -12,5 +12,5 @@ def launch_api(ctx, *args, **kwargs):
 
     from ___PROCESSED_NAME.utils.paths import Paths
 
-    os.chdir(str(Paths.ROOT))
-    os.system("uvicorn src.___PROCESSED_NAME.api.main:app --reload")
+    os.chdir(str(Paths.API))
+    os.system("uvicorn main:app --reload")

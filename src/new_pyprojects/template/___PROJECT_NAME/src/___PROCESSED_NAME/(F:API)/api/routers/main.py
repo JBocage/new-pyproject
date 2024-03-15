@@ -1,6 +1,5 @@
+from ___PROCESSED_NAME.api.routers.hello_world import router as hello_router
 from fastapi import APIRouter
-
-from .hello_world import router as hello_router
 
 router = APIRouter()
 

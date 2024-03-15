@@ -16,21 +16,25 @@ class Paths:
         print(Paths.ROOT)
     """
 
-    #: The root directory of the project.
-    ROOT = pathlib.Path(__file__).parent.parent.parent.parent
+    #: The root directory of the package.
+    PACKAGE_ROOT = pathlib.Path(__file__).parent.parent
     #: The source directory of the project.
     #: This is where the source code of the project is stored.
-    SRC = ROOT / "src"
+    #: WARNING: This is not the root directory of the project and using this
+    #: may cause issues if the project is installed as a package.
+    SRC = PACKAGE_ROOT.parent
+    #: The root directory of the project.
+    #: WARNING: This is not the root directory of the project and using this
+    #: may cause issues if the project is installed as a package.
+    ROOT = SRC.parent
 
     #: The docs directory for sphinx  # F:DOCS
     DOCS = ROOT / "docs"  # F:DOCS
 
     #: The CLI directory of the project. This is where the CLI scripts are stored. # F:CLI
-    CLI = SRC / "___PROCESSED_NAME" / "cli"  # F:CLI
+    CLI = PACKAGE_ROOT / "cli"  # F:CLI
     #: The API directory of the project. This is where the API scripts are stored. # F:API
-    API = SRC / "___PROCESSED_NAME" / "api"  # F:API
+    API = PACKAGE_ROOT / "api"  # F:API
     #: The Streamlit app directory of the project.   # F:STREAMLIT
     #: This is where the Streamlit app scripts are stored. # F:STREAMLIT
-    STREAMLIT_APP = SRC / "___PROCESSED_NAME" / "streamlit_app"  # F:STREAMLIT
-    #: The .env file of the project. # F:ENV
-    ENV = ROOT / ".env"  # F:ENV
+    STREAMLIT_APP = PACKAGE_ROOT / "streamlit_app"  # F:STREAMLIT

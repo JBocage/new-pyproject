@@ -1,6 +1,5 @@
+from ___PROCESSED_NAME.api.routers.main import router as main_router
 from fastapi import FastAPI
-
-from .routers.main import router as main_router
 
 app = FastAPI()
 

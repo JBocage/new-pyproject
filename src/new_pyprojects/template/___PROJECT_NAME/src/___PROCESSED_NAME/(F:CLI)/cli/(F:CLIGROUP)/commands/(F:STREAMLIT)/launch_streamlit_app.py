@@ -11,5 +11,4 @@ def launch_streamlit_app(ctx, *args, **kwargs):
     Launches the streamlit app
     """
 
-    os.chdir(str(Paths.ROOT))
     os.system(f"streamlit run {str(Paths.STREAMLIT_APP / 'main.py')}")
